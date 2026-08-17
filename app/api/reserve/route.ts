@@ -13,13 +13,20 @@ import type { Reservation } from "@/types/reservation";
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "reservations.json");
 
+// Serializes reads+writes within this process so concurrent POSTs can't
+// race on a read-modify-write of the same file (each request's turn
+// chains onto the previous one's completion, success or failure).
+let writeQueue: Promise<unknown> = Promise.resolve();
+
 async function readReservations(): Promise<Reservation[]> {
+  let content: string;
   try {
-    const content = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(content) as Reservation[];
-  } catch {
-    return [];
+    content = await fs.readFile(DATA_FILE, "utf-8");
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") return [];
+    throw err;
   }
+  return JSON.parse(content) as Reservation[];
 }
 
 export async function POST(request: Request) {
@@ -41,11 +48,19 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
   };
 
-  try {
+  const task = writeQueue.then(async () => {
     await fs.mkdir(DATA_DIR, { recursive: true });
     const reservations = await readReservations();
     reservations.push(reservation);
     await fs.writeFile(DATA_FILE, JSON.stringify(reservations, null, 2));
+  });
+  // Keep the queue alive even if this write fails, so the next request
+  // doesn't jump ahead of a still-pending one; only this call's own
+  // rejection is what gets reported below.
+  writeQueue = task.catch(() => {});
+
+  try {
+    await task;
   } catch {
     return Response.json(
       { errors: ["Couldn't save the reservation. Please try again."] },
