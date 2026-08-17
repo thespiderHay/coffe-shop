@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import MenuCard from "@/components/MenuCard";
+import MenuTabs from "@/components/MenuTabs";
 import PourLine from "@/components/PourLine";
 import ReserveTable from "@/components/ReserveTable";
 import Section from "@/components/Section";
-import { MENU_CATEGORY_ORDER, getMenuByCategory } from "@/lib/menu";
+import { MENU_CATEGORY_ORDER, getAllMenuItems } from "@/lib/menu";
 
 export const metadata: Metadata = {
   title: "Menu — The Spider",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function MenuPage() {
-  const menuByCategory = getMenuByCategory();
+  const items = getAllMenuItems();
 
   return (
     <>
@@ -24,19 +24,10 @@ export default function MenuPage() {
         </h1>
       </Section>
 
-      {MENU_CATEGORY_ORDER.map((category, index) => (
-        <div key={category}>
-          <PourLine />
-          <Section className={index % 2 === 1 ? "bg-surface-alt" : ""}>
-            <h2 className="font-display text-h2 text-ink">{category}</h2>
-            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {menuByCategory[category].map((item) => (
-                <MenuCard key={item.name} item={item} />
-              ))}
-            </div>
-          </Section>
-        </div>
-      ))}
+      <PourLine />
+      <Section>
+        <MenuTabs items={items} categories={MENU_CATEGORY_ORDER} />
+      </Section>
 
       <PourLine />
 

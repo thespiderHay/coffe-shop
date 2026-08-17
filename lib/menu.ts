@@ -37,19 +37,6 @@ export function getAllMenuItems(): MenuItem[] {
   return cachedItems;
 }
 
-export function getMenuByCategory(): Record<MenuCategory, MenuItem[]> {
-  const items = getAllMenuItems();
-  const byCategory = Object.fromEntries(
-    MENU_CATEGORY_ORDER.map((category) => [category, [] as MenuItem[]]),
-  ) as Record<MenuCategory, MenuItem[]>;
-
-  for (const item of items) {
-    byCategory[item.category].push(item);
-  }
-
-  return byCategory;
-}
-
 export function getPopularItems(): MenuItem[] {
   return getAllMenuItems().filter((item) => item.badge === "Popular");
 }
