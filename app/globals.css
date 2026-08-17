@@ -1,26 +1,54 @@
 @import "tailwindcss";
+@import "../docs/design/tokens.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-fraunces), "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: var(--font-karla), "Karla", "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", "SFMono-Regular", ui-monospace, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink-inverse);
+}
+
+/* Pour Line — components.md §5, given verbatim */
+.pour-line {
+  fill: none;
+  stroke: var(--color-accent-line);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+  transition: stroke-dashoffset var(--duration-slow) var(--ease-pour);
+}
+.pour-line.is-visible {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pour-line {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
+/* style-guide.md §7 / §9: motion respects prefers-reduced-motion sitewide,
+   not just the Pour Line. Card-hover lifts and button-hover transitions
+   stay (they aren't vestibular triggers) but happen instantly instead of
+   animating in over --duration-fast/--duration-base. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }

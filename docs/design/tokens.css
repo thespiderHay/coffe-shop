@@ -1,0 +1,191 @@
+/* ==========================================================================
+   Design Tokens — Coffee Shop
+   Tailwind CSS v4, CSS-first theme (no tailwind.config.js needed).
+
+   This is the source of truth for color, type, spacing, radius, shadow,
+   and motion. To wire it up, replace the contents of app/globals.css with:
+
+     @import "tailwindcss";
+     @import "../docs/design/tokens.css";
+
+     body {
+       background: var(--color-surface);
+       color: var(--color-ink);
+       font-family: var(--font-sans);
+     }
+
+   Every raw value lives in :root once. The @theme block only maps those
+   values onto Tailwind's namespace so utilities like bg-accent, text-ink,
+   font-display, rounded-pill, and shadow-warm-md are generated for you.
+   Components should reference the semantic names (--color-surface,
+   --color-accent) rather than the raw roast-scale names (--color-crema,
+   --color-medium-roast) — see style-guide.md for the full rationale.
+   ========================================================================== */
+
+:root {
+  /* --------------------------------------------------------------------
+     1. Roast Scale — the brand palette
+     Named for stages of a coffee roast, light to dark. Six hexes, each
+     with one job. Do not add a seventh without a reason.
+     -------------------------------------------------------------------- */
+  --color-green-bean:    #7C8363; /* unroasted bean — freshness, "in stock", eco cues. Sparing use only. */
+  --color-crema:         #F3E9D8; /* base paper — the site's primary background */
+  --color-light-roast:   #D9B98C; /* secondary surface — alternating section tint */
+  --color-medium-roast:  #B4622D; /* primary accent — CTAs, links, active states */
+  --color-medium-roast-hover: #9A4E22; /* pressed/hover state of the accent, same hue, darker */
+  --color-dark-roast:    #2B1B14; /* ink — dark surfaces, body text on light */
+  --color-crema-gold:    #C99A3C; /* hairline accent — pour-line, stars, focus glow */
+
+  /* --------------------------------------------------------------------
+     2. Semantic aliases — what components actually reference
+     -------------------------------------------------------------------- */
+  --color-surface:         var(--color-crema);
+  --color-surface-alt:     var(--color-light-roast);
+  --color-surface-inverse: var(--color-dark-roast);
+  --color-surface-accent:  var(--color-medium-roast);
+
+  --color-ink:            var(--color-dark-roast);
+  --color-ink-inverse:    var(--color-crema);
+  --color-ink-muted:      #6B5B4F; /* dark-roast mixed toward crema, for secondary copy on light */
+  --color-ink-muted-inverse: #C9B9A8; /* crema mixed toward dark-roast, for secondary copy on dark */
+
+  --color-accent:         var(--color-medium-roast);
+  --color-accent-hover:   var(--color-medium-roast-hover);
+  --color-accent-line:    var(--color-crema-gold);
+  --color-fresh:          var(--color-green-bean);
+
+  --color-border:         #E1D2B8; /* on crema/light-roast surfaces */
+  --color-border-inverse: #4A362B; /* on dark-roast surfaces */
+
+  --color-focus-ring:     var(--color-crema-gold);
+
+  --color-error:          #B3261E; /* form validation errors only — never reuse --color-accent for this */
+  --color-error-bg:       #F7E4E1; /* tint for an error banner/field background */
+
+  /* --------------------------------------------------------------------
+     3. Type families
+     Display used sparingly at large sizes only. Body carries everything
+     else. Mono is reserved for anything that reads like a printed bag
+     label: prices, weights, roast dates, order numbers.
+     -------------------------------------------------------------------- */
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans:    "Karla", "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", "SFMono-Regular", ui-monospace, monospace;
+
+  /* --------------------------------------------------------------------
+     4. Type scale — 1.25 (major third) ratio from a 16px base
+     -------------------------------------------------------------------- */
+  --text-xs:   0.8rem;    /* 12.8px — legal, fine print */
+  --text-sm:   0.875rem;  /* 14px   — captions, labels, nav */
+  --text-base: 1rem;      /* 16px   — body copy */
+  --text-md:   1.125rem;  /* 18px   — lead paragraphs */
+  --text-lg:   1.375rem;  /* 22px   — card titles */
+  --text-xl:   1.75rem;   /* 28px   — section eyebrows / small headings */
+  --text-2xl:  2.25rem;   /* 36px   — section headings */
+  --text-3xl:  3rem;      /* 48px   — page headings */
+  --text-4xl:  4rem;      /* 64px   — hero, tablet */
+  --text-5xl:  5.5rem;    /* 88px   — hero, desktop */
+
+  /* --------------------------------------------------------------------
+     5. Layout
+     -------------------------------------------------------------------- */
+  --container-max:    80rem;  /* 1280px */
+  --container-padding: 1.5rem; /* 24px, mobile gutter */
+  --section-y:         6rem;   /* 96px, desktop section rhythm */
+  --section-y-mobile:  3.5rem; /* 56px */
+
+  /* --------------------------------------------------------------------
+     6. Radius
+     Buttons and inputs stay square-ish (printed-label feel); only
+     photography and pills round off.
+     -------------------------------------------------------------------- */
+  --radius-sm:   0.25rem; /* 4px  — inputs, buttons */
+  --radius-md:   0.5rem;  /* 8px  — cards */
+  --radius-lg:   1rem;    /* 16px — framed photography */
+  --radius-pill: 999px;   /* badges, roast-level chips */
+
+  /* --------------------------------------------------------------------
+     7. Shadow — warm-tinted (dark-roast, not black), so elevation reads
+     as a coffee stain, not a generic UI drop shadow.
+     -------------------------------------------------------------------- */
+  --shadow-warm-sm: 0 1px 2px rgba(43, 27, 20, 0.08);
+  --shadow-warm-md: 0 8px 20px rgba(43, 27, 20, 0.12);
+  --shadow-warm-lg: 0 20px 40px rgba(43, 27, 20, 0.18);
+
+  /* --------------------------------------------------------------------
+     8. Motion
+     -------------------------------------------------------------------- */
+  --duration-fast:  150ms;
+  --duration-base:  300ms;
+  --duration-slow:  700ms;  /* pour-line draw-in */
+  --ease-standard:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-pour:      cubic-bezier(0.22, 1, 0.36, 1); /* decelerating, like liquid settling */
+}
+
+/* ==========================================================================
+   Tailwind theme mapping — generates utility classes from the tokens above.
+   e.g. bg-surface, text-ink-inverse, font-display, text-hero,
+        rounded-pill, shadow-warm-md, duration-slow
+   ========================================================================== */
+@theme inline {
+  --color-surface:            var(--color-surface);
+  --color-surface-alt:        var(--color-surface-alt);
+  --color-surface-inverse:    var(--color-surface-inverse);
+  --color-surface-accent:     var(--color-surface-accent);
+  --color-ink:                var(--color-ink);
+  --color-ink-inverse:        var(--color-ink-inverse);
+  --color-ink-muted:          var(--color-ink-muted);
+  --color-ink-muted-inverse:  var(--color-ink-muted-inverse);
+  --color-accent:              var(--color-accent);
+  --color-accent-hover:        var(--color-accent-hover);
+  --color-accent-line:         var(--color-accent-line);
+  --color-fresh:                var(--color-fresh);
+  --color-border:              var(--color-border);
+  --color-border-inverse:      var(--color-border-inverse);
+  --color-focus-ring:          var(--color-focus-ring);
+  --color-error:                var(--color-error);
+  --color-error-bg:             var(--color-error-bg);
+
+  /* raw roast-scale names, exposed for one-off/illustrative use only */
+  --color-green-bean:   var(--color-green-bean);
+  --color-crema:        var(--color-crema);
+  --color-light-roast:  var(--color-light-roast);
+  --color-medium-roast: var(--color-medium-roast);
+  --color-dark-roast:   var(--color-dark-roast);
+  --color-crema-gold:   var(--color-crema-gold);
+
+  --font-display: var(--font-display);
+  --font-sans:    var(--font-sans);
+  --font-mono:    var(--font-mono);
+
+  --text-xs:   var(--text-xs);
+  --text-sm:   var(--text-sm);
+  --text-base: var(--text-base);
+  --text-md:   var(--text-md);
+  --text-lg:   var(--text-lg);
+  --text-xl:   var(--text-xl);
+  --text-2xl:  var(--text-2xl);
+  --text-3xl:  var(--text-3xl);
+  --text-4xl:  var(--text-4xl);
+  --text-5xl:  var(--text-5xl);
+
+  --text-hero:  var(--text-5xl);
+  --text-hero--line-height: 1.02;
+  --text-h1:    var(--text-3xl);
+  --text-h1--line-height: 1.08;
+  --text-h2:    var(--text-2xl);
+  --text-h2--line-height: 1.12;
+  --text-h3:    var(--text-lg);
+  --text-h3--line-height: 1.2;
+
+  --radius-sm:   var(--radius-sm);
+  --radius-md:   var(--radius-md);
+  --radius-lg:   var(--radius-lg);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-warm-sm: var(--shadow-warm-sm);
+  --shadow-warm-md: var(--shadow-warm-md);
+  --shadow-warm-lg: var(--shadow-warm-lg);
+
+  --container-max: var(--container-max);
+}

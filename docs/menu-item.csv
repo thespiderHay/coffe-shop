@@ -1,0 +1,21 @@
+category,name,description,price,badge
+Espresso Drinks,Espresso,"Double shot, pulled to order",3.25,
+Espresso Drinks,Americano,"Espresso, hot water, crema left intact",3.75,
+Espresso Drinks,Cappuccino,"Espresso, steamed milk, thick foam cap",4.50,Popular
+Espresso Drinks,Cortado,"Equal parts espresso and steamed milk",4.25,
+Espresso Drinks,Caramel Macchiato,"Vanilla, steamed milk, espresso, caramel drizzle",5.25,House Favorite
+Pastries,Butter Croissant,"Laminated dough, baked fresh each morning",3.75,
+Pastries,Almond Croissant,"Twice-baked, almond cream, sliced almonds",4.75,Popular
+Pastries,Cinnamon Roll,"House-made, cream cheese icing",4.50,House Favorite
+Pastries,Blueberry Muffin,"Wild blueberries, streusel top",3.95,
+Pastries,Chocolate Chip Cookie,"Dark chocolate chunks, sea salt",3.25,
+Sandwiches,Turkey & Swiss,"Roasted turkey, swiss, arugula, dijon on sourdough",9.50,
+Sandwiches,Avocado Toast,"Sourdough, smashed avocado, chili flake, lemon",8.75,Popular
+Sandwiches,Ham & Gruyère Croissant,"Black forest ham, gruyère, whole grain mustard",8.95,House Favorite
+Sandwiches,Caprese Panini,"Fresh mozzarella, tomato, basil, balsamic glaze",8.50,
+Sandwiches,Egg & Cheddar Breakfast Sandwich,"Fried egg, cheddar, English muffin",6.95,
+Cold Drinks,Iced Latte,"Espresso, cold milk, over ice",4.75,
+Cold Drinks,Cold Brew,"Steeped 18 hours, served over ice",4.25,Popular
+Cold Drinks,Iced Matcha Latte,"Ceremonial grade matcha, cold milk, ice",5.25,
+Cold Drinks,Vanilla Sweet Cream Cold Brew,"Cold brew, house vanilla sweet cream",5.50,House Favorite
+Cold Drinks,Iced Chai Latte,"Housemade chai concentrate, cold milk, ice",4.95,
