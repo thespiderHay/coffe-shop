@@ -50,6 +50,8 @@ export default function Home() {
         </div>
       </section>
 
+      <PourLine />
+
       <Section>
         <h2 className="font-display text-h1 text-ink">Popular right now</h2>
         <p className="mt-2 max-w-lg font-sans text-md text-ink-muted">
